@@ -10,7 +10,10 @@ public class Person
     {
         return $"Name: {Name}, Age: {Age}";
     }
-
+    public override int GetHashCode()
+    {
+        return HashCode.Combine(Name, Age);
+    }
     public override bool Equals(object? obj)
     {
         if (obj == null)
@@ -31,24 +34,40 @@ public class Person
         return false;
     }
 
-    public static bool operator ==(Person a, Person b)
+    public static bool operator ==(Person? a, Person? b)
     {
-        if (a.Name == b.Name && a.Age == b.Age)
-        {
-            return true;
-        }
-        
-        return false;
-    }
-
-    public static bool operator !=(Person a, Person b)
-    {
-        if (a.Name != b.Name || a.Age != b.Age)
+        if (ReferenceEquals(a, b))
         {
             return true;
         }
 
-        return false;
+        if (a is null || b is null)
+        {
+            return false;
+        }
+        return a.Name == b.Name && a.Age == b.Age;
     }
 
+    public static bool operator !=(Person? a, Person? b)
+    {
+        return !(a == b);
+    }
+
+    public static bool operator <(Person? a, Person? b)
+    {
+        return b > a;
+    }
+
+    public static bool operator >(Person? a, Person? b)
+    {
+        if (ReferenceEquals(a, b))
+        {
+            return false;
+        }
+        if (a is null || b is null)
+        {
+            return false;
+        }
+        return a.Age > b.Age;
+    }
 }

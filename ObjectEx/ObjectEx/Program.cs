@@ -9,6 +9,7 @@ internal class Program
         var p1 = new Person { Name = "Yury", Age = 41 };
         var p2 = new Person { Name = "Alex", Age = 33 };
         var p3 = new Person { Name = "Yury", Age = 41 };
+        Person? p4 = null;
 
 
         Console.WriteLine(p1);
@@ -19,6 +20,12 @@ internal class Program
 
         Console.WriteLine(p3 == p1);
 
+        Console.WriteLine(p3 != p2);
 
+        Console.WriteLine(p1 < p3);
+
+        Console.WriteLine(p1 > p3);
+
+        Console.WriteLine(p3.GetHashCode());
     }
 }
